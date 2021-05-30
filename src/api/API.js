@@ -1,4 +1,5 @@
 export const BASE_URL = "https://openlibrary.org";
+export const BOOKS_PER_RESPONSE = 100;
 
 export async function search(query, page = 0) {
     const response = await fetch(`${BASE_URL}/search?q=${encodeURIComponent(query)}&page=${page + 1}`);
