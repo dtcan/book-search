@@ -13,3 +13,7 @@ export async function search(query, page = 0) {
         }))
     };
 }
+
+export function imageSrc(isbn) {
+    return `https://openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`;
+}
