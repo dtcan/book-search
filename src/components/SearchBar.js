@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSearchResults } from "../app/actions";
+import './SearchBar.css';
 
 export default function SearchBar() {
     const loading = useSelector(state => state.loading);
