@@ -9,6 +9,8 @@ export default function SearchResult() {
     const result = useSelector(state => state.result);
     const error = useSelector(state => state.error);
 
+    const firstIndex = page * BOOKS_PER_PAGE;
+
     if(!query) {
         return <div>
             <h1>Type a query in the search box above</h1>
@@ -27,7 +29,7 @@ export default function SearchResult() {
         </div>
     }else {
         return <div>
-            {result.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE).map((book,i) => <Book key={i} book={book} />)}
+            {result.slice(firstIndex, firstIndex + BOOKS_PER_PAGE).map((book,i) => <Book key={firstIndex + i} book={book} />)}
         </div>
     }
 }
