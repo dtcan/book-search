@@ -14,9 +14,9 @@ export default function SearchNav() {
         let firstIndex = (page * BOOKS_PER_PAGE) + 1;
         let lastIndex = Math.min(result.length, (page + 1) * BOOKS_PER_PAGE);
         return <nav>
-            <button disabled={firstIndex === 1} onClick={() => { dispatch(prevPage()); }}>Previous</button>
-            <span>Viewing {firstIndex} - {lastIndex} out of {result.length} {result.length === 1 ? "result" : "results"}</span>
-            <button disabled={lastIndex === result.length} onClick={() => { dispatch(nextPage()); }}>Next</button>
+            <button className="prev-button" disabled={firstIndex === 1} onClick={() => { dispatch(prevPage()); }}>Previous</button>
+            <span className="results-indices">Viewing {firstIndex} - {lastIndex} out of {result.length} {result.length === 1 ? "result" : "results"}</span>
+            <button className="next-button" disabled={lastIndex === result.length} onClick={() => { dispatch(nextPage()); }}>Next</button>
         </nav>
     }
     return <></>;

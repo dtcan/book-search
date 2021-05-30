@@ -10,25 +10,27 @@ export default function SearchResult() {
     const error = useSelector(state => state.error);
 
     const firstIndex = page * BOOKS_PER_PAGE;
+    const resultsClassName = "results";
+    const resultsFeedbackClassName = "results-feedback";
 
     if(!query) {
-        return <div>
-            <h1>Type a query in the search box above</h1>
+        return <div className={resultsClassName}>
+            <h1 className={resultsFeedbackClassName}>Type a query in the search box above</h1>
         </div>
     }else if(loading) {
-        return <div>
-            <h1>...</h1>
+        return <div className={resultsClassName}>
+            <h1 className={resultsFeedbackClassName}>...</h1>
         </div>
     }else if(error) {
-        return <div>
-            <h1>An error occured.</h1>
+        return <div className={resultsClassName}>
+            <h1 className={resultsFeedbackClassName}>An error occured.</h1>
         </div>
     }else if(result.length <= 0) {
-        return <div>
-            <h1>No results for "{query}"</h1>
+        return <div className={resultsClassName}>
+            <h1 className={resultsFeedbackClassName}>No results for "{query}"</h1>
         </div>
     }else {
-        return <div>
+        return <div className={resultsClassName}>
             {result.slice(firstIndex, firstIndex + BOOKS_PER_PAGE).map((book,i) => <Book key={firstIndex + i} book={book} />)}
         </div>
     }
