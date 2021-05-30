@@ -9,13 +9,13 @@ export default function Book({ book }) {
     
     // The object tag is used to handle an image not existing, the inner img tag is a fallback
     // Source: https://stackoverflow.com/questions/980855/
-    return <div class="book">
-        <div class="book-cover">
+    return <div className="book">
+        <div className="book-cover">
             <object data={book?.isbn ? imageSrc(book.isbn) : DEFAULT_COVER} type="image/jpg">
                 <img alt={title} src={DEFAULT_COVER} />
             </object>
         </div>
-        <div class="book-details">
+        <div className="book-details">
             <h1>{title}</h1>
             <ul>
                 <li>Author{hasMultipleAuthors > 0 ? 's' : ''}: {hasAuthor ? book.author.join(', ') : "Unknown"}</li>
