@@ -23,7 +23,8 @@ export default function SearchNav() {
         window.scrollTo(0,0);
     }
 
-    const sort = (key, order) => {
+    const sort = e => {
+        const [key, order] = e.target.value.split(';');
         dispatch(sortResult(key, order === 'desc'));
     }
 
@@ -34,11 +35,11 @@ export default function SearchNav() {
             <button className="prev-button" disabled={firstIndex === 1} onClick={prev}>Previous</button>
             <div className="nav-content">
                 <span className="nav-indices">Viewing {firstIndex} - {lastIndex} out of {result.length} {result.length === 1 ? "result" : "results"}</span><br />
-                <select onChange={e => { sort.apply(e, e.target.value.split(';')); }}>
-                    <option value="title;asc" selected={sortKey === 'title' && !sortDesc}>Sort by Title (A to Z)</option>
-                    <option value="title;desc" selected={sortKey === 'title' && sortDesc}>Sort by Title (Z to A)</option>
-                    <option value="published;asc" selected={sortKey === 'published' && !sortDesc}>Sort by Publish Year (Old to New)</option>
-                    <option value="published;desc" selected={sortKey === 'published' && sortDesc}>Sort by Publish Year (New to Old)</option>
+                <select value={`${sortKey};${sortDesc ? 'desc' : 'asc'}`} onChange={sort}>
+                    <option value="title;asc">Sort by Title (A to Z)</option>
+                    <option value="title;desc">Sort by Title (Z to A)</option>
+                    <option value="published;asc">Sort by Publish Year (Old to New)</option>
+                    <option value="published;desc">Sort by Publish Year (New to Old)</option>
                 </select>
             </div>
             <button className="next-button" disabled={lastIndex === result.length} onClick={next}>Next</button>
