@@ -11,13 +11,23 @@ export default function SearchNav() {
     const error = useSelector(state => state.error);
     const dispatch = useDispatch();
 
+    const prev = () => {
+        dispatch(prevPage());
+        window.scrollTo(0,0);
+    }
+
+    const next = () => {
+        dispatch(nextPage());
+        window.scrollTo(0,0);
+    }
+
     if(query && !loading && !error && result.length > 0) {
         let firstIndex = (page * BOOKS_PER_PAGE) + 1;
         let lastIndex = Math.min(result.length, (page + 1) * BOOKS_PER_PAGE);
         return <nav>
-            <button className="prev-button" disabled={firstIndex === 1} onClick={() => { dispatch(prevPage()); }}>Previous</button>
+            <button className="prev-button" disabled={firstIndex === 1} onClick={prev}>Previous</button>
             <span className="results-indices">Viewing {firstIndex} - {lastIndex} out of {result.length} {result.length === 1 ? "result" : "results"}</span>
-            <button className="next-button" disabled={lastIndex === result.length} onClick={() => { dispatch(nextPage()); }}>Next</button>
+            <button className="next-button" disabled={lastIndex === result.length} onClick={next}>Next</button>
         </nav>
     }
     return <></>;
