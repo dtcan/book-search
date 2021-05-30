@@ -1,0 +1,14 @@
+.book {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+
+.book-cover, .book-details {
+    margin: 10px;
+}
+
+.book-cover * {
+    width: 117px;
+    height: 180px;
+}

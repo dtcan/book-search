@@ -1,4 +1,5 @@
 import { imageSrc } from '../api/API';
+import './Book.css';
 
 export default function Book({ book }) {
     const DEFAULT_COVER = "./cover.jpg";
@@ -16,11 +17,11 @@ export default function Book({ book }) {
             </object>
         </div>
         <div className="book-details">
-            <h1>{title}</h1>
-            <ul>
-                <li>Author{hasMultipleAuthors > 0 ? 's' : ''}: {hasAuthor ? book.author.join(', ') : "Unknown"}</li>
-                <li>First Published: {book?.published || "Unknown"}</li>
-            </ul>
+            <h3 className="book-title">{title}</h3>
+            <p>
+                <span>Author{hasMultipleAuthors > 0 ? 's' : ''}: {hasAuthor ? book.author.join(', ') : "Unknown"}</span><br />
+                <span>First Published: {book?.published || "Unknown"}</span>
+            </p>
         </div>
     </div>
 }
