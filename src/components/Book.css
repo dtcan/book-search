@@ -8,7 +8,7 @@
     margin: 10px;
 }
 
-.book-cover * {
+.book-cover {
     width: 117px;
     height: 180px;
 }
