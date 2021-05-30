@@ -1,7 +1,8 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { Action } from '../app/actions';
 import { initialState } from '../app/reducer';
 import SearchBar from './SearchBar';
 
@@ -24,4 +25,27 @@ it('disables input while loading', () => {
 
     expect(textInput).toBeDisabled();
     expect(button).toBeDisabled();
+});
+
+it('perform a search request', done => {
+    const store = mockStore(initialState);
+
+    const component = render(
+        <Provider store={store}>
+            <SearchBar />
+        </Provider>
+    );
+
+    const query = "test query";
+    store.subscribe(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: Action.SEARCH_REQUEST,
+            query
+        });
+        done();
+    });
+
+    const form = component.getByRole("search");
+    fireEvent.submit(form, { target: [{ value: query }] });
 });
