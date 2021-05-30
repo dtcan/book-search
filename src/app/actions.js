@@ -5,7 +5,8 @@ export const Action = {
     SEARCH_SUCCESS: "SEARCH_SUCCESS",
     SEARCH_FAILURE: "SEARCH_FAILURE",
     NEXT_PAGE: "NEXT_PAGE",
-    PREV_PAGE: "PREV_PAGE"
+    PREV_PAGE: "PREV_PAGE",
+    SORT_RESULT: "SORT_RESULT"
 }
 
 export function searchRequest(query) {
@@ -56,5 +57,12 @@ export function nextPage() {
 export function prevPage() {
     return {
         type: Action.PREV_PAGE
+    }
+}
+
+export function sortResult(key) {
+    return {
+        type: Action.SORT_RESULT,
+        key
     }
 }

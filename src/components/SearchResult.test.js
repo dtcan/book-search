@@ -75,7 +75,7 @@ it('renders an error message', () => {
 });
 
 it('renders a second page of search results', () => {
-    const result = new Array(BOOKS_PER_PAGE * 2).fill(undefined).map((_,i) => ({ title: `Book ${i+1}` }));
+    const result = new Array(BOOKS_PER_PAGE * 2).fill(undefined).map((_,i) => ({ title: `Book ${'A'.repeat(i+1)}` }));
 
     const store = createStore(reducer);
 
@@ -89,6 +89,6 @@ it('renders a second page of search results', () => {
     store.dispatch(searchSuccess(result));
     store.dispatch(nextPage());
     
-    expect(component.getByText(`Book ${BOOKS_PER_PAGE + 1}`)).toBeInTheDocument();
-    expect(component.getByText(`Book ${BOOKS_PER_PAGE * 2}`)).toBeInTheDocument();
+    expect(component.getByText(`Book ${'A'.repeat(BOOKS_PER_PAGE + 1)}`)).toBeInTheDocument();
+    expect(component.getByText(`Book ${'A'.repeat(BOOKS_PER_PAGE * 2)}`)).toBeInTheDocument();
 });

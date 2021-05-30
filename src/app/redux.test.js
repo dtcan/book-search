@@ -1,4 +1,4 @@
-import { nextPage, prevPage, searchFailure, searchRequest, searchSuccess } from "./actions";
+import { nextPage, prevPage, searchFailure, searchRequest, searchSuccess, sortResult } from "./actions";
 import { initialState, reducer, BOOKS_PER_PAGE } from "./reducer"
 
 it('initializes the state', () => {
@@ -43,7 +43,7 @@ it('sets loading and query properties on request', () => {
 });
 
 it('loads the search results on success', () => {
-    const result = new Array(10).map(() => Math.random());
+    const result = new Array(10).fill(0).map(() => Math.random());
     const newState = reducer(undefined, searchSuccess(result));
     expect(newState.loading).toBe(false);
     expect(newState.result).toEqual(result);
@@ -57,3 +57,18 @@ it('sets error message on failure', () => {
     expect(newState.result.length).toEqual(0);
     expect(newState.error).toEqual(error);
 });
+
+
+// Sort test
+it('sorts by a given property', () => {
+    const result = new Array(10).fill(0).map(() => ({ 'a': Math.random(), 'b': Math.random() }));
+    let state = reducer(undefined, searchSuccess([...result]));
+    
+    state = reducer(state, sortResult('a'));
+    result.sort((a,b) => a['a'] - b['a']);
+    expect(state.result).toEqual(result);
+    
+    state = reducer(state, sortResult('b'));
+    result.sort((a,b) => a['b'] - b['b']);
+    expect(state.result).toEqual(result);
+})
