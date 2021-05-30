@@ -12,13 +12,17 @@ export const initialState = {
 export const BOOKS_PER_PAGE = 40;
 
 function sortResult(result, key, desc) {
-    result.sort((a,b) => {
+    return [...result].sort((a,b) => {
         if(a[key] === b[key]) {
             return 0;
-        }else if(a[key] < b[key]) {
-            return desc ? 1 : -1;
+        }else if(a[key] === undefined) {
+            return 1;
+        }else if(b[key] === undefined) {
+            return -1;
+        }else if((a[key] > b[key]) === desc) {
+            return -1;
         }
-        return desc ? -1 : 1;
+        return 1;
     });
 }
 
@@ -27,8 +31,7 @@ export function reducer(state = initialState, action) {
         case Action.SEARCH_REQUEST:
             return {...state, loading: true, query: action.query, result: [], error: ""}
         case Action.SEARCH_SUCCESS:
-            sortResult(action.result, state.sortKey);
-            return {...state, loading: false, result: action.result}
+            return {...state, loading: false, result: sortResult(action.result, state.sortKey, state.sortDesc)}
         case Action.SEARCH_FAILURE:
             return {...state, loading: false, error: action.error}
         case Action.NEXT_PAGE:
@@ -41,10 +44,11 @@ export function reducer(state = initialState, action) {
         case Action.PREV_PAGE:
             return {...state, page: Math.max(0, state.page - 1)}
         case Action.SORT_RESULT:
+            let newResult = state.result;
             if(action.key !== state.sortKey || action.desc !== state.sortDesc) {
-                sortResult(state.result, action.key, action.desc);
+                newResult = sortResult(state.result, action.key, action.desc);
             }
-            return {...state, sortKey: action.key, sortDesc: action.desc}
+            return {...state, result: newResult, sortKey: action.key, sortDesc: action.desc}
         default: return state
     }
 }
