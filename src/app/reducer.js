@@ -6,18 +6,19 @@ export const initialState = {
     loading: false,
     result: [],
     error: "",
-    sortKey: "title"
+    sortKey: "title",
+    sortDesc: false
 }
 export const BOOKS_PER_PAGE = 40;
 
-function sortResult(result, key) {
+function sortResult(result, key, desc) {
     result.sort((a,b) => {
         if(a[key] === b[key]) {
             return 0;
         }else if(a[key] < b[key]) {
-            return -1;
+            return desc ? 1 : -1;
         }
-        return 1;
+        return desc ? -1 : 1;
     });
 }
 
@@ -40,10 +41,10 @@ export function reducer(state = initialState, action) {
         case Action.PREV_PAGE:
             return {...state, page: Math.max(0, state.page - 1)}
         case Action.SORT_RESULT:
-            if(action.key !== state.sortKey) {
-                sortResult(state.result, action.key);
+            if(action.key !== state.sortKey || action.desc !== state.sortDesc) {
+                sortResult(state.result, action.key, action.desc);
             }
-            return {...state, sortKey: action.key}
+            return {...state, sortKey: action.key, sortDesc: action.desc}
         default: return state
     }
 }

@@ -60,9 +60,10 @@ export function prevPage() {
     }
 }
 
-export function sortResult(key) {
+export function sortResult(key, desc=false) {
     return {
         type: Action.SORT_RESULT,
-        key
+        key,
+        desc
     }
 }

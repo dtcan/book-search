@@ -67,8 +67,16 @@ it('sorts by a given property', () => {
     state = reducer(state, sortResult('a'));
     result.sort((a,b) => a['a'] - b['a']);
     expect(state.result).toEqual(result);
+
+    state = reducer(state, sortResult('a', true));
+    result.reverse();
+    expect(state.result).toEqual(result);
     
     state = reducer(state, sortResult('b'));
     result.sort((a,b) => a['b'] - b['b']);
+    expect(state.result).toEqual(result);
+    
+    state = reducer(state, sortResult('b', true));
+    result.reverse();
     expect(state.result).toEqual(result);
 })
