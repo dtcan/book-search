@@ -20,7 +20,8 @@ export default function SearchResult() {
         </div>
     }else if(loading) {
         return <div className={resultsClassName}>
-            <h1 className={resultsFeedbackClassName}>...</h1>
+            <h1 className={resultsFeedbackClassName}>Looking for books...</h1>
+            <div className="loading-icon">&#128213;</div>
         </div>
     }else if(error) {
         return <div className={resultsClassName}>
