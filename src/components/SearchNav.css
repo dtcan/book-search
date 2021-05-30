@@ -5,6 +5,10 @@ nav {
     padding: 16px;
 }
 
+.nav-content {
+    text-align: center;
+}
+
 .prev-button, .next-button {
     background-color: skyblue;
     border: 2px solid black;

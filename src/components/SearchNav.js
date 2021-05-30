@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { nextPage, prevPage } from "../app/actions";
+import { nextPage, prevPage, sortResult } from "../app/actions";
 import { BOOKS_PER_PAGE } from "../app/reducer";
 import './SearchNav.css';
 
@@ -9,6 +9,8 @@ export default function SearchNav() {
     const loading = useSelector(state => state.loading);
     const result = useSelector(state => state.result);
     const error = useSelector(state => state.error);
+    const sortKey = useSelector(state => state.sortKey);
+    const sortDesc = useSelector(state => state.sortDesc);
     const dispatch = useDispatch();
 
     const prev = () => {
@@ -21,12 +23,24 @@ export default function SearchNav() {
         window.scrollTo(0,0);
     }
 
+    const sort = (key, order) => {
+        dispatch(sortResult(key, order === 'desc'));
+    }
+
     if(query && !loading && !error && result.length > 0) {
         let firstIndex = (page * BOOKS_PER_PAGE) + 1;
         let lastIndex = Math.min(result.length, (page + 1) * BOOKS_PER_PAGE);
         return <nav>
             <button className="prev-button" disabled={firstIndex === 1} onClick={prev}>Previous</button>
-            <span className="results-indices">Viewing {firstIndex} - {lastIndex} out of {result.length} {result.length === 1 ? "result" : "results"}</span>
+            <div className="nav-content">
+                <span className="nav-indices">Viewing {firstIndex} - {lastIndex} out of {result.length} {result.length === 1 ? "result" : "results"}</span><br />
+                <select onChange={e => { sort.apply(e, e.target.value.split(';')); }}>
+                    <option value="title;asc" selected={sortKey === 'title' && !sortDesc}>Sort by Title (A to Z)</option>
+                    <option value="title;desc" selected={sortKey === 'title' && sortDesc}>Sort by Title (Z to A)</option>
+                    <option value="published;asc" selected={sortKey === 'published' && !sortDesc}>Sort by Publish Year (Old to New)</option>
+                    <option value="published;desc" selected={sortKey === 'published' && sortDesc}>Sort by Publish Year (New to Old)</option>
+                </select>
+            </div>
             <button className="next-button" disabled={lastIndex === result.length} onClick={next}>Next</button>
         </nav>
     }
