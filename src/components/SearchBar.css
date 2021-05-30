@@ -4,6 +4,14 @@
     margin: 10px;
 }
 
+.search-label { /* Source: https://stackoverflow.com/questions/26032089/ */
+    position: absolute !important; /* Outside the DOM flow */
+    height: 1px; width: 1px; /* Nearly collapsed */
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE 7+ only support clip without commas */
+    clip: rect(1px, 1px, 1px, 1px); /* All other browsers */
+}
+
 .search-input {
     flex-grow: 1;
     border-radius: 20px 0px 0px 20px;
