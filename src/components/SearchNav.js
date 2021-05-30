@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { nextPage, prevPage } from "../app/actions";
 import { BOOKS_PER_PAGE } from "../app/reducer";
+import './SearchNav.css';
 
 export default function SearchNav() {
     const page = useSelector(state => state.page);
