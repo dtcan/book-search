@@ -6,23 +6,20 @@ import { BOOKS_PER_PAGE, reducer } from '../app/reducer';
 import SearchResult from './SearchResult';
 
 it('renders search results', () => {
-    const result = {
-        numFound: 2,
-        books: [
-            {
-                title: "A Great Book",
-                isbn: "9876543210",
-                published: 2020,
-                author: ["John Smith"]
-            },
-            {
-                title: "Another Great Book",
-                isbn: "9876543211",
-                published: 2021,
-                author: ["Mary Sue"]
-            }
-        ]
-    };
+    const result = [
+        {
+            title: "A Great Book",
+            isbn: "9876543210",
+            published: 2020,
+            author: ["John Smith"]
+        },
+        {
+            title: "Another Great Book",
+            isbn: "9876543211",
+            published: 2021,
+            author: ["Mary Sue"]
+        }
+    ];
 
     const store = createStore(reducer);
 
@@ -35,7 +32,7 @@ it('renders search results', () => {
     store.dispatch(searchRequest("test query"));
     store.dispatch(searchSuccess(result));
 
-    for(let book of result.books) {
+    for(let book of result) {
         expect(component.getByText(book.title)).toBeInTheDocument();
         expect(component.getByText(s => s.includes(book.published))).toBeInTheDocument();
         for(let author of book.author) {
@@ -45,11 +42,6 @@ it('renders search results', () => {
 });
 
 it('renders no results', () => {
-    const result = {
-        numFound: 0,
-        books: []
-    };
-
     const store = createStore(reducer);
 
     const component = render(
@@ -60,7 +52,7 @@ it('renders no results', () => {
 
     const query = "test query"
     store.dispatch(searchRequest(query));
-    store.dispatch(searchSuccess(result));
+    store.dispatch(searchSuccess([]));
     
     // If query has no results, we should mention the query on the page
     expect(component.getByText(s => s.includes(query))).toBeInTheDocument();
@@ -83,10 +75,7 @@ it('renders an error message', () => {
 });
 
 it('renders a second page of search results', () => {
-    const result = {
-        numFound: BOOKS_PER_PAGE * 2,
-        books: new Array(BOOKS_PER_PAGE * 2).fill(undefined).map((_,i) => ({ title: `Book ${i+1}` }))
-    };
+    const result = new Array(BOOKS_PER_PAGE * 2).fill(undefined).map((_,i) => ({ title: `Book ${i+1}` }));
 
     const store = createStore(reducer);
 

@@ -35,12 +35,12 @@ export function fetchSearchResults(query) {
         try {
             const result = await search(query);
             if (result.numFound > BOOKS_PER_RESPONSE) {
-                const results = await Promise.all(new Array(Math.ceil(result.numFound / BOOKS_PER_RESPONSE) - 1).map((_, i) => search(query, i + 1)))
+                const results = await Promise.all(new Array(Math.ceil(result.numFound / BOOKS_PER_RESPONSE) - 1).fill(undefined).map((_, i) => search(query, i + 1)))
                 for(let newResult of results) {
                     result.books.push.apply(result.books, newResult.books);
                 }
             }
-            return dispatch(searchSuccess(result));
+            return dispatch(searchSuccess(result.books));
         }catch(error) {
             return dispatch(searchFailure(error));
         }

@@ -21,13 +21,13 @@ export default function SearchResult() {
         return <div>
             <h1>An error occured.</h1>
         </div>
-    }else if(result.books.length <= 0) {
+    }else if(result.length <= 0) {
         return <div>
             <h1>No results for "{query}"</h1>
         </div>
     }else {
         return <div>
-            {result.books.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE).map(book => <Book book={book} />)}
+            {result.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE).map(book => <Book book={book} />)}
         </div>
     }
 }

@@ -12,7 +12,7 @@ const mockStore = configureMockStore([thunk]);
 
 afterEach(() => fetchMock.restore());
 
-it('does a full search request', () => {
+it('does a full search request', done => {
     fetchMock.getOnce(s => s.endsWith(1), testResponse1).getOnce(s => s.endsWith(2), testResponse2);
     
     const query = "great gatsby";
@@ -30,17 +30,20 @@ it('does a full search request', () => {
     const store = mockStore(initialState);
     store.dispatch(fetchSearchResults(query)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
+        done();
     });
 });
 
-it('handles a failed search', () => {
+it('handles a failed search', done => {
     fetchMock.getOnce(s => s.endsWith(1), testResponse1).getOnce(s => s.endsWith(2), 404);
 
     const store = mockStore(initialState);
     store.dispatch(fetchSearchResults("test query")).then(() => {
-        const state = store.getState();
-        expect(state.loading).toBe(false);
-        expect(state.result.length).toBe(0);
-        expect(state.error).toBeTruthy();
+        const actions = store.getActions();
+        expect(actions.length).toBe(2);
+        expect(actions[0].type).toBe(Action.SEARCH_REQUEST);
+        expect(actions[1].type).toBe(Action.SEARCH_FAILURE);
+        expect(actions[1].error).toBeTruthy();
+        done();
     });
 })
