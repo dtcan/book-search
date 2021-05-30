@@ -1,0 +1,71 @@
+{
+    "numFound": 12,
+    "books": [
+        {
+            "title": "Good Omens",
+            "published": 1990,
+            "isbn": "9780739474143",
+            "author": ["Neil Gaiman","Terry Pratchett"]
+        },
+        {
+            "title": "Quite Nice and Fairly Accurate Good Omens Script Book",
+            "published": 2019,
+            "isbn": "9781472261267",
+            "author": ["Neil Gaiman"]
+        },
+        {
+            "title": "Good Omens",
+            "published": 2015,
+            "isbn": "9781910281918",
+            "author": ["Neil Gaiman","Terry Pratchett","Full Cast","Mark Heap","Peter Serafinowicz"]
+        },
+        {
+            "title": "Good Omens CD",
+            "published": 2009,
+            "isbn": "0061735817",
+            "author": ["Neil Gaiman","Terry Pratchett","Martin Jarvis"]
+        },
+        {
+            "title": "Gate of good omen",
+            "published": 2006,
+            "isbn": "0969412274",
+            "author": ["Maxwell, Robin"]
+        },
+        {
+            "title": "X-Statix : Good Omens",
+            "published": 2003,
+            "isbn": "9780785110590",
+            "author": ["Peter Milligan"]
+        },
+        {
+            "title": "Gate of good omen trilogy",
+            "published": 2006,
+            "isbn": "0969412266",
+            "author": ["Maxwell, Robin"]
+        },
+        {
+            "title": "The Nice and Accurate Good Omens TV Companion: Your guide to Armageddon and the series based on the bestselling novel by Terry Pratchett and Neil Gaiman",
+            "published": 2019,
+            "isbn": "9781472258298",
+            "author": ["Matt Whyman","Neil Gaiman","Rob Wilkins"]
+        },
+        {
+            "title": "Sarcastic Saying Quote Notebook Well Thats Not a Good Sign Journal Bad Omen Warning Diary",
+            "published": 2020,
+            "isbn": "9798652136864",
+            "author": ["N. G. N.G. Publications"]
+        },
+        {
+            "title": "The old Egyptian fortune-teller's last legacy: containing, I. The wheel of fortune by pricking with a pin. ... VII. Omens of good and bad luck",
+            "published": 1775
+        },
+        {
+            "title": "The old Egyptian fortune-teller's last legacy: containing, I. The wheel of fortune by pricking with a pin. ... VII. Omens of good and bad luck",
+            "published": 1775
+        },
+        {
+            "title": "Good Omens (duplicate)",
+            "author": ["Terry Pratchett","Neil Gaiman"]
+        }
+    ]
+}
