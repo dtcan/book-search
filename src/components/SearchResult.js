@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { BOOKS_PER_PAGE } from "../app/reducer";
 import Book from './Book';
+import './SearchResult.css';
 
 export default function SearchResult() {
     const page = useSelector(state => state.page);
@@ -31,7 +32,7 @@ export default function SearchResult() {
         </div>
     }else {
         return <div className={resultsClassName}>
-            {result.slice(firstIndex, firstIndex + BOOKS_PER_PAGE).map((book,i) => <Book key={firstIndex + i} book={book} />)}
+            {result.slice(firstIndex, firstIndex + BOOKS_PER_PAGE).map((book,i) => <Book className={i % 2 === 1 ? "book-alt" : ""} key={firstIndex + i} book={book} />)}
         </div>
     }
 }

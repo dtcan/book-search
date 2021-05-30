@@ -1,7 +1,7 @@
 import { imageSrc } from '../api/API';
 import './Book.css';
 
-export default function Book({ book }) {
+export default function Book({ book, className }) {
     const DEFAULT_COVER = "./cover.jpg";
     
     const title = book?.title || "Unknown Title";
@@ -10,7 +10,7 @@ export default function Book({ book }) {
     
     // The object tag is used to handle an image not existing, the inner img tag is a fallback
     // Source: https://stackoverflow.com/questions/980855/
-    return <div className="book">
+    return <div className={`book ${className}`}>
         <div className="book-cover">
             <object data={book?.isbn ? imageSrc(book.isbn) : DEFAULT_COVER} type="image/jpg">
                 <img alt={title} src={DEFAULT_COVER} />
