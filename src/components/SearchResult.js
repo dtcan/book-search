@@ -27,7 +27,7 @@ export default function SearchResult() {
         </div>
     }else {
         return <div>
-            {result.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE).map(book => <Book book={book} />)}
+            {result.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE).map((book,i) => <Book key={i} book={book} />)}
         </div>
     }
 }
