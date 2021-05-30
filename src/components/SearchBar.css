@@ -7,15 +7,20 @@
 .search-input {
     flex-grow: 1;
     border-radius: 20px 0px 0px 20px;
+    border-width: 2px 0px 2px 2px;
     padding: 5px 10px;
 }
 
 .search-button {
+    background-color: lightblue;
     border-radius: 0px 20px 20px 0px;
+    border-width: 2px;
     padding: 5px 10px;
 }
 
 .search * {
+    border-style: solid;
+    border-color: black;
     font-size: x-large;
     min-width: none;
 }

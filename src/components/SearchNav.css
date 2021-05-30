@@ -4,3 +4,11 @@ nav {
     justify-content: space-between;
     padding: 16px;
 }
+
+.prev-button, .next-button {
+    background-color: skyblue;
+    border: 2px solid black;
+    border-radius: 15px;
+    font-size: medium;
+    padding: 10px;
+}
