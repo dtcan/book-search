@@ -13,13 +13,15 @@ export const BOOKS_PER_PAGE = 40;
 
 function sortResult(result, key, desc) {
     return [...result].sort((a,b) => {
-        if(a[key] === b[key]) {
+        const aKey = a[key]?.toLowerCase?.() ?? a[key];
+        const bKey = b[key]?.toLowerCase?.() ?? b[key];
+        if(aKey === bKey) {
             return 0;
-        }else if(a[key] === undefined) {
+        }else if(aKey === undefined) {
             return 1;
-        }else if(b[key] === undefined) {
+        }else if(bKey === undefined) {
             return -1;
-        }else if((a[key] > b[key]) === desc) {
+        }else if((aKey > bKey) === desc) {
             return -1;
         }
         return 1;
